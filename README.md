@@ -112,5 +112,5 @@ push_vmc, rcx_vmc, 0, reg_vmc
 So the 0 in the b field, can be trashed. If you would like you can set this to zero, or to any random value because this field isn't accessed.
 
 
-## Credit
-This post is the thing that gave me the idea for this project: https://medium.com/%40112piyushsingh/hiding-code-like-a-spy-vm-based-code-obfuscation-in-c-with-runtime-decryption-ccb24c53b7d6
+
+This post is the thing that gave me the idea for this project: [Credit](https://medium.com/%40112piyushsingh/hiding-code-like-a-spy-vm-based-code-obfuscation-in-c-with-runtime-decryption-ccb24c53b7d6)
