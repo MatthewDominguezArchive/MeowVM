@@ -2,7 +2,11 @@
 Single header include 🤩
 
 # Protection Overview
-![vm1](https://postimg.cc/9wD1wThS)
+MeowVM gives you the opportunity to have a 100% unique program that is 1:1 equivalent in functionality. These two images below have the program printed out from two meow_vms with all different vm_codes. This is great for avoiding signature detection :)
+![vm1](https://i.postimg.cc/9wD1wThS/vm1.png)
+![vm2](https://i.postimg.cc/dL4tVy0H/vm2.png)
+
+You can also setup as many meow_vms as you'd like. Let's say you are writing a authentication program where you need to send packets to a server and recieve packets from a server. If you set up a different meow_vm with unique vm_codes for each of those send and recieve functions. It slows reverse engineers way down because even though they have decyphered what one of the functions does, doesn't mean they have decyphered what the other one does.
 
 ### Language instructions and call instruction
 Create an instance of mvm::meow by default initializing the class.
