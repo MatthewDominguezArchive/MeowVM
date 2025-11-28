@@ -1,14 +1,14 @@
 # MeowVM
 Single header include 🤩
 
-## How to use
+# Protection Overview
 
-### Create a meowvm
+### Language instructions and call instruction
 Create an instance of mvm::meow by default initializing the class.
 ```cpp
 mvm::meow_vm vm{};
 ```
-### Language instructions and call instruction
+
 Before the use of an instruction, you must add that instruction.
 ```cpp
 vm.add_instruction(vm.get_mov(), 0x10);
@@ -111,6 +111,27 @@ push_vmc, rcx_vmc, 0, reg_vmc
 ```
 So the 0 in the b field, can be trashed. If you would like you can set this to zero, or to any random value because this field isn't accessed.
 
+A program in meowvm is this under the hood:
+```cpp
+using program = std::vector<instruction>;
+```
 
+Here is how you can create a program:
+```cpp
+program this_program
+{
+  {
+    // instruction 1
+  },
+  {
+    // instruction 2
+  }
+};
+```
+
+Load up as many instructions (they must match the vm codes as the vm they will be ran on), and then call:
+```cpp
+vm.run_program(this_program);
+```
 
 This post is the thing that gave me the idea for this project: [Credit](https://medium.com/%40112piyushsingh/hiding-code-like-a-spy-vm-based-code-obfuscation-in-c-with-runtime-decryption-ccb24c53b7d6)
