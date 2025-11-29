@@ -44,14 +44,27 @@ namespace mvm{
         std::unordered_map<std::uint16_t, std::uint64_t*>register_table;
 
         void set_flags(instruction& itn) {
-            auto sa = static_cast<std::int64_t>(itn.a);
-            auto sb = static_cast<std::int64_t>(itn.b);
+            std::uint64_t ra = *register_table[itn.a]; // A has to be a register
+            std::uint64_t rb;         // B depends on extra;
+            if (itn.extra == abs) {
+                rb = itn.b;
+            }
+            else if (itn.extra == reg) {
+                rb = *register_table[itn.b];
+            }
+            else if (itn.extra == ptr) {
+                rb = *reinterpret_cast<std::uint64_t*>(itn.b);
+            }
+            else return;
+
+            auto sa = static_cast<std::int64_t>(ra);
+            auto sb = static_cast<std::int64_t>(rb);
             auto result = sa - sb;
 
             flags = 0;
-            flags |= (itn.a == itn.b) ? true << 0 : 0;                  // ZF 
+            flags |= (ra == rb) ? true << 0 : 0;                  // ZF 
             flags |= (result < 0) ? true << 1 : 0;                      // SF
-            flags |= (itn.a < itn.b) ? true << 2 : 0;                   // CF
+            flags |= (ra < rb) ? true << 2 : 0;                   // CF
             flags |= (((sa ^ sb) & (sa ^ result)) < 0) ? true << 3 : 0; // OF
         }
 
