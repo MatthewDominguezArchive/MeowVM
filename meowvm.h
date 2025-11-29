@@ -35,6 +35,8 @@ namespace mvm{
         std::uint8_t reg = 1;
         std::uint8_t ptr = 2;
 
+        bool jumped = false;
+
         std::vector<std::uint64_t> stack;
 
         std::unordered_map<std::uint16_t, std::function<void(instruction&)>>instruction_table;
@@ -181,6 +183,7 @@ namespace mvm{
             set_flags(itn);
         }  
         void jmp(instruction& itn){
+            jumped = true;
             if (itn.extra == abs) {
                 rip = itn.a;
             }
@@ -285,6 +288,10 @@ namespace mvm{
 
         void run_program(std::vector<instruction> program){
             for (;rip < program.size(); rip++){
+                if (jumped) {
+                    jumped = false;
+                    rip--;
+                }
                 execute_instruction(program[rip]);
             }
         }
